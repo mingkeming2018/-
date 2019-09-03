@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Examples</title>
+<link rel="stylesheet" type="text/css" href="css/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/icon.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.easyui.min.js"></script>
+<script src="js/vue.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script src="js/vue-resouce.js"></script>
+<style type="text/css">
+	.up.panel-body{
+		background:url('images/timg.jpg');
+	}
+	.up.panel{
+		margin: 0 auto;
+	}
+	.panel-body{
+		padding:2px;
+	}
+</style>
+</head>
+<body class="easyui-layout" fit="true">
+   <!-- <div id="p" class="easyui-panel" style="width:500px;height:200px;padding:10px" title="My Panel" iconCls="icon-save" collapsible="true">content title</div> -->
+   <div class="up" data-options="region:'north',split:true,minHeight:150" style="height: 80px">
+   	<div class="upimg"><img src="images/logo (1).png"></div>
+   	<div id="cc" class="easyui-calendar" style="width:180px;height:180px;left:80%;"></div>
+   </div>
+    <!-- <div data-options="region:'south',title:'South Title',split:true" style="height:100%;"></div>
+    <div data-options="region:'east',title:'East',split:true" style="width:100px;"></div> -->
+    <div data-options="region:'west',title:'日常管理',split:true,minWidth:200" style="width:100px;">
+    	<ul id="tt" class="easyui-tree">
+    <li>
+		<span>设备管理</span>
+		<ul>
+			<li data-options="attributes:{'url':'shebei5.jsp'}"><span>设备按名字查询</span></li>
+			<li data-options="attributes:{'url':'shebeiout.jsp'}"><span>设备状态查询</span></li>
+			<li data-options="attributes:{'url':'inandout.jsp'}"><span>设备出入操作</span></li>
+		</ul>
+	</li>
+    <li>
+		<span>人员管理</span>
+		<ul>
+			<li data-options="attributes:{'url':''}">
+				<span><a href="http://192.168.0.197:8080/lyq1/user_manage.jsp" target="_blank">人员管理</a> </span></li>
+		</ul>
+	</li>
+	</ul>
+    </div>
+    <div data-options="region:'center',title:''" style="padding:0;background:#eee;height:100%;">
+    	<div id="tabs" class="easyui-tabs">
+    <div title="首页" style="padding:20px;display:none;">
+		欢迎登陆
+    </div>
+    
+</div>
+    </div>
+</body>
+<script>
+	$('#tt').tree({
+		onClick:function(node){
+			var tabs=$('#tabs');
+			var tab=tabs.tabs("getTab",node.text);
+			if(tab){
+				tabs.tabs("select",node.text);}
+			else{
+			tabs.tabs('add',{
+    			title:node.text,
+    			content:node.text,
+    			href:node.attributes.url,
+    			closable:true
+								});			
+		}
+	}
+	});
+	$('#cc').calendar({firstDay:"1"});
+	$('#cc').calendar({weeks:['日','一','二','三','四','五','六']});
+	$('#cc').calendar({months:['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']});
+</script>
+</html>
